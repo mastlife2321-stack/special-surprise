@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Prarthana ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ffe0ed, #eee4ff, #fff5f8);
+    color: #70264f;
+    text-align: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+header {
+    padding: 55px 18px 30px;
+}
+
+h1 {
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    color: #ff4385;
+    margin: 20px 0;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin: auto;
+}
+
+button {
+    border: none;
+    padding: 13px 20px;
+    border-radius: 14px;
+    background: linear-gradient(45deg, #ff4385, #a46bff);
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 8px 4px;
+    transition: 0.2s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.container {
+    width: min(1000px, 100%);
+    margin: auto;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 25px 20px;
+    border-radius: 24px;
+    box-shadow: 0 8px 25px rgba(170, 70, 120, 0.12);
+}
+
+.card h2 {
+    margin: 10px 0;
+}
+
+.card p {
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.emoji {
+    font-size: 45px;
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+.options {
+    display: grid;
+    gap: 9px;
+    margin-top: 15px;
+}
+
+.options button {
+    width: 100%;
+    margin: 0;
+    background: #fff0f7;
+    color: #8e3468;
+    border: 1px solid #ffc6df;
+}
+
+.message {
+    margin: 15px 0;
+    font-weight: bold;
+    min-height: 25px;
+    line-height: 1.6;
+}
+
+.gift {
+    font-size: 75px;
+    cursor: pointer;
+    margin: 15px;
+    animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+    50% { transform: translateY(-8px); }
+}
+
+.letter {
+    background: #fff5fa;
+    padding: 22px;
+    border-radius: 18px;
+    line-height: 1.9;
+    white-space: pre-line;
+    text-align: left;
+    border: 1px dashed #ff9bc5;
+}
+
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.tile {
+    margin: 0;
+    min-width: 0;
+    min-height: 60px;
+    padding: 8px;
+    font-size: 1.5rem;
+    background: linear-gradient(135deg, #ffd8e9, #e3d8ff);
+    color: #853765;
+}
+
+.tile.open {
+    background: white;
+    border: 1px solid #ffb4d3;
+}
+
+footer {
+    padding: 30px 15px;
+}
+
+#confetti {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.floating-heart {
+    position: fixed;
+    bottom: -40px;
+    pointer-events: none;
+    animation: floatUp 4s linear forwards;
+    z-index: 5;
+}
+
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+@media (max-width: 650px) {
+    header {
+        padding-top: 35px;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        padding: 12px;
+        gap: 14px;
+    }
+
+    .full {
+        grid-column: auto;
+    }
+
+    .card {
+        padding: 22px 17px;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .tile {
+        min-height: 55px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<header>
+    <div>✨ A Little Surprise Made With Love ✨</div>
+
+    <h1>For My Prarthana ❤️</h1>
+
+    <p class="subtitle">
+        You make ordinary moments magical and my world more beautiful.
+        This little website is just for you, my love! 💖
+    </p>
+
+    <button onclick="celebrate()">Tap for Magic 🎉</button>
+    <button onclick="showHearts()">Send Love 💕</button>
+</header>
+
+<main class="container">
+
+    <!-- LOVE QUIZ -->
+    <section class="card">
+        <div class="emoji">💘</div>
+        <h2>Love Quiz</h2>
+        <p>What makes our relationship so special?</p>
+
+        <div class="options">
+            <button onclick="quizAnswer(true)">
+                Our love and little moments 💖
+            </button>
+
+            <button onclick="quizAnswer(false)">
+                Who wins every argument 😜
+            </button>
+
+            <button onclick="quizAnswer(false)">
+                Who eats the last dessert 🍰
+            </button>
+        </div>
+
+        <div class="message" id="quizMessage"></div>
+
+        <button onclick="resetQuiz()">Play Again ↻</button>
+    </section>
+
+    <!-- MYSTERY GIFT -->
+    <section class="card">
+        <div class="emoji">🎁</div>
+        <h2>Mystery Gift</h2>
+        <p>Tap the gift to discover your surprise!</p>
+
+        <div class="gift" onclick="openGift()">🎁</div>
+
+        <div class="message" id="giftMessage">
+            Your surprise is waiting, Prarthana! 💗
+        </div>
+
+        <button onclick="openGift()">Open My Gift 💝</button>
+    </section>
+
+    <!-- MEMORY GAME -->
+    <section class="card">
+        <div class="emoji">🧠</div>
+        <h2>Match the Hearts</h2>
+        <p>Find all four matching pairs!</p>
+
+        <div class="memory-grid" id="memoryGrid"></div>
+
+        <div class="message" id="memoryMessage">
+            Matches: 0 / 4
+        </div>
+
+        <button onclick="startMemory()">Restart Game ↻</button>
+    </section>
+
+    <!-- COMPLIMENT GAME -->
+    <section class="card">
+        <div class="emoji">🌹</div>
+        <h2>Choose Your Compliment</h2>
+        <p>Which sweet message would you like to hear?</p>
+
+        <div class="options">
+            <button onclick="compliment(0)">About my smile 😊</button>
+            <button onclick="compliment(1)">About my heart 💗</button>
+            <button onclick="compliment(2)">About being me ✨</button>
+        </div>
+
+        <div class="message" id="complimentMessage">
+            Choose one, my love! 💌
+        </div>
+    </section>
+
+    <!-- LOVE LETTER -->
+    <section class="card full">
+        <div class="emoji">💌</div>
+        <h2>A Love Letter For You</h2>
+        <p>A little reminder of how special you are.</p>
+
+        <div class="letter" id="loveLetter">My dearest Prarthana ❤️,
+
+If I could give you one thing in this world, I would give you the chance to see yourself through my eyes.
+
+You would see how beautiful your heart is, how precious your smile is, and how much happiness you bring into my life.
+
+Thank you for being part of my story. I hope I can keep giving you reasons to smile, moments to remember, and love that makes you feel special every day.
+
+No matter how ordinary a day may seem, having you in my life makes it more meaningful.
+
+You are my favourite person and a beautiful part of my world.
+
+With all my love,
+Your favourite person ❤️</div>
+
+        <button onclick="celebrate()">Celebrate Our Love 🎉</button>
+        <button onclick="editLetter()">Personalise Letter ✍️</button>
+    </section>
+
+    <!-- FINAL SURPRISE -->
+    <section class="card full">
+        <div class="emoji">💖</div>
+        <h2>One Last Surprise...</h2>
+        <p>Ready for one more little reminder?</p>
+
+        <button onclick="finalSurprise()">
+            Click If You Love Me 💕
+        </button>
+
+        <div class="message" id="finalMessage"></div>
+    </section>
+
+</main>
+
+<footer>
+    Made with endless love, especially for Prarthana 💗
+    <br>
+    <small>You deserve all the happiness in the world.</small>
+</footer>
+
+<script>
+// CONFETTI ANIMATION
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+let confettiPieces = [];
+let animating = false;
+
+function resizeCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = window.innerWidth * dpr;
+    canvas.height = window.innerHeight * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function celebrate() {
+    const colors = [
+        "#ff4385", "#ffcf70", "#a46bff",
+        "#6bdcc5", "#ff8d8d", "#ffffff"
+    ];
+
+    for (let i = 0; i < 180; i++) {
+        confettiPieces.push({
+            x: Math.random() * window.innerWidth,
+            y: -20 - Math.random() * 200,
+            vx: (Math.random() - 0.5) * 6,
+            vy: 2 + Math.random() * 5,
+            size: 4 + Math.random() * 6,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            rotation: Math.random() * 6,
+            life: 150
+        });
+    }
+
+    if (!animating) {
+        animating = true;
+        requestAnimationFrame(drawConfetti);
+    }
+
+    showHearts();
+}
+
+function drawConfetti() {
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    confettiPieces = confettiPieces.filter(p => p.life-- > 0 && p.y < window.innerHeight + 30);
+
+    confettiPieces.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.025;
+        p.rotation += 0.08;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+        ctx.restore();
+    });
+
+    if (confettiPieces.length) {
+        requestAnimationFrame(drawConfetti);
+    } else {
+        animating = false;
+        ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+    }
+}
+
+// FLOATING HEARTS
+function showHearts() {
+    const hearts = ["💖", "💕", "💗", "💘", "🌸", "✨"];
+
+    for (let i = 0; i < 18; i++) {
+        const heart = document.createElement("span");
+        heart.className = "floating-heart";
+        heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 95 + "vw";
+        heart.style.fontSize = (20 + Math.random() * 25) + "px";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 6500);
+    }
+}
+
+// LOVE QUIZ
+function quizAnswer(correct) {
+    const message = document.getElementById("quizMessage");
+
+    if (correct) {
+        message.textContent = "Correct! The little moments with you mean everything. ❤️";
+        celebrate();
+    } else {
+        message.textContent = "Cute guess! Try again, my love. 💕";
+    }
+}
+
+function resetQuiz() {
+    document.getElementById("quizMessage").textContent = "";
+}
+
+// MYSTERY GIFT
+const gifts = [
+    "💐 Surprise! You deserve a beautiful bouquet and a big smile.",
+    "🍰 Surprise! Your favourite dessert is on the menu.",
+    "🌙 Surprise! A cosy evening together, with all my attention.",
+    "🎟️ Surprise! One special date planned just for you.",
+    "💖 Surprise! A thousand reasons why I love having you in my life."
+];
+
+let giftIndex = -1;
+
+function openGift() {
+    giftIndex = (giftIndex + 1) % gifts.length;
+    document.getElementById("giftMessage").textContent = gifts[giftIndex];
+    document.querySelector(".gift").textContent = "💝";
+    celebrate();
+}
+
+// MEMORY MATCH GAME
+const symbols = ["🌸", "🌸", "💖", "💖", "⭐", "⭐", "🧁", "🧁"];
+let firstTile = null;
+let locked = false;
+let matches = 0;
+
+function startMemory() {
+    firstTile = null;
+    locked = false;
+    matches = 0;
+
+    document.getElementById("memoryMessage").textContent = "Matches: 0 / 4";
+
+    const shuffled = [...symbols].sort(() => Math.random() - 0.5);
+    const grid = document.getElementById("memoryGrid");
+    grid.innerHTML = "";
+
+    shuffled.forEach(symbol => {
+        const tile = document.createElement("button");
+        tile.className = "tile";
+        tile.textContent = "?";
+        tile.dataset.symbol = symbol;
+
+        tile.addEventListener("click", () => flipTile(tile));
+        grid.appendChild(tile);
+    });
+}
+
+function flipTile(tile) {
+    if (locked || tile.classList.contains("open") || tile === firstTile) {
+        return;
+    }
+
+    tile.textContent = tile.dataset.symbol;
+    tile.classList.add("open");
+
+    if (!firstTile) {
+        firstTile = tile;
+        return;
+    }
+
+    if (firstTile.dataset.symbol === tile.dataset.symbol) {
+        matches++;
+        firstTile = null;
+
+        document.getElementById("memoryMessage").textContent =
+            `Matches: ${matches} / 4`;
+
+        if (matches === 4) {
+            document.getElementById("memoryMessage").textContent =
+                "You did it! A perfect match! 💖";
+            celebrate();
+        }
+    } else {
+        locked = true;
+        const previous = firstTile;
+        firstTile = null;
+
+        setTimeout(() => {
+            previous.textContent = "?";
+            tile.textContent = "?";
+            previous.classList.remove("open");
+            tile.classList.remove("open");
+            locked = false;
+        }, 750);
+    }
+}
+
+startMemory();
+
+// COMPLIMENTS
+const compliments = [
+    "Your smile can make an ordinary day feel magical. ☀️",
+    "Your kind heart makes the world a little warmer. 🌷",
+    "There is nobody else quite like you, and that is beautiful. ✨"
+];
+
+function compliment(index) {
+    document.getElementById("complimentMessage").textContent =
+        compliments[index];
+
+    showHearts();
+}
+
+// PERSONALISE LOVE LETTER
+function editLetter() {
+    const letter = document.getElementById("loveLetter");
+
+    const updated = prompt(
+        "Write your own special love letter for Prarthana:",
+        letter.textContent
+    );
+
+    if (updated !== null && updated.trim() !== "") {
+        letter.textContent = updated;
+    }
+}
+
+// FINAL SURPRISE
+function finalSurprise() {
+    document.getElementById("finalMessage").textContent =
+        "Prarthana, if I had to choose again, I would still choose you. Today, tomorrow, and in every beautiful chapter ahead. I love you! ❤️";
+
+    celebrate();
+}
+
+// A FEW HEARTS ON ARRIVAL
+window.addEventListener("load", () => {
+    setTimeout(showHearts, 500);
+});
+</script>
+
+</body>
+</html>
